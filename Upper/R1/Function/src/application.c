@@ -54,3 +54,4 @@ void _tim2_callback()
 	
 }
 	
+void test(){}
