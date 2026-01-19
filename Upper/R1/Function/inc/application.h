@@ -15,16 +15,27 @@
 #include "mygo.h"
 #include "math.h"
 
+#include "CAN_Basic.h"
+#include "DJ_Motor.h"
+
 #include "stdio.h"
 
-enum TaskMode
-{
-    Wait_Cmd = 0,
-    Speed_Hit,     
-    Accel_Hit      
-}; 
+enum UpperState{
+	Free = 0, Busy
+};
 
 extern float init_degree;
+
+extern uint8_t workstate;
+
+extern uint8_t hit_state;
+
+extern uint8_t bow_state;
+
+extern uint8_t hit_cmd;
+
+extern uint8_t bow_cmd;
+
 void _tim2_callback();
 
 #endif

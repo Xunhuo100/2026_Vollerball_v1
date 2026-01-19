@@ -21,7 +21,9 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
-
+#include "mygo.h"
+#include "upper.h"
+extern myGo m;
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart4;
@@ -330,5 +332,12 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 }
 
 /* USER CODE BEGIN 1 */
-
+//void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+//{
+//	if(huart->Instance == USART1)
+//	{
+//		extract_data(&(m.data));
+//		m.rx_res	= HAL_UART_Receive_IT(&huart1, (uint8_t *)&(m.data.motor_recv_data), sizeof(m.data.motor_recv_data));
+//	}
+//}
 /* USER CODE END 1 */

@@ -54,10 +54,10 @@ const osThreadAttr_t defaultTask_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
-/* Definitions for UpperTask */
-osThreadId_t UpperTaskHandle;
-const osThreadAttr_t UpperTask_attributes = {
-  .name = "UpperTask",
+/* Definitions for Task_Hit */
+osThreadId_t Task_HitHandle;
+const osThreadAttr_t Task_Hit_attributes = {
+  .name = "Task_Hit",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
@@ -68,6 +68,20 @@ const osThreadAttr_t Test_LED_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
+/* Definitions for Task_Bow */
+osThreadId_t Task_BowHandle;
+const osThreadAttr_t Task_Bow_attributes = {
+  .name = "Task_Bow",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
+/* Definitions for Task_Main */
+osThreadId_t Task_MainHandle;
+const osThreadAttr_t Task_Main_attributes = {
+  .name = "Task_Main",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -75,8 +89,10 @@ const osThreadAttr_t Test_LED_attributes = {
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
-extern void upper_task(void *argument);
+extern void task_hit(void *argument);
 extern void test_led_task(void *argument);
+extern void task_bow(void *argument);
+extern void task_main(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -110,11 +126,17 @@ void MX_FREERTOS_Init(void) {
   /* creation of defaultTask */
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
-  /* creation of UpperTask */
-  UpperTaskHandle = osThreadNew(upper_task, NULL, &UpperTask_attributes);
+  /* creation of Task_Hit */
+  Task_HitHandle = osThreadNew(task_hit, NULL, &Task_Hit_attributes);
 
   /* creation of Test_LED */
   Test_LEDHandle = osThreadNew(test_led_task, NULL, &Test_LED_attributes);
+
+  /* creation of Task_Bow */
+  Task_BowHandle = osThreadNew(task_bow, NULL, &Task_Bow_attributes);
+
+  /* creation of Task_Main */
+  Task_MainHandle = osThreadNew(task_main, NULL, &Task_Main_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
