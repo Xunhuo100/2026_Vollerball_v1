@@ -65,19 +65,19 @@ float Pid_Regulate(float Reference, float Present_Feedback, PIDStructTypedef* PI
 void MyMotor_PID_init(MOTORPIDstructTypedef* MotorPID)
 {
 	
-    MotorPID->PosPID.Kp = 5.0f;
+    MotorPID->PosPID.Kp = 22.0f;
     MotorPID->PosPID.Ki = 0.005f;
-    MotorPID->PosPID.Kd = 0.10f;
+    MotorPID->PosPID.Kd = 4.50f;
     MotorPID->PosPID.LimitIntegral = 50.0f;
     MotorPID->PosPID.LimitOutput = 200.0f;
 		MotorPID->PosPID.Integral = 0;
 		MotorPID->PosPID.PreError = 0;
 	
-    MotorPID->SpeedPID.Kp = 100.0f;
-    MotorPID->SpeedPID.Ki = 0.1f;
-    MotorPID->SpeedPID.Kd = 0.0f;
+    MotorPID->SpeedPID.Kp = 155.0f;
+    MotorPID->SpeedPID.Ki = 0.05f;
+    MotorPID->SpeedPID.Kd = 40.0f;
     MotorPID->SpeedPID.LimitIntegral = 500.0f;
-    MotorPID->SpeedPID.LimitOutput = 1000.0f;
+    MotorPID->SpeedPID.LimitOutput = 3500.0f;
 		MotorPID->SpeedPID.Integral = 0;
 		MotorPID->SpeedPID.PreError = 0;
 
