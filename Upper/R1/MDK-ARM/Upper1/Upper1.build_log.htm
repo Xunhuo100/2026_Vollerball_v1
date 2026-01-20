@@ -17,37 +17,165 @@ Library Manager: ArmAr.exe V5.06 update 7 (build 960)
 Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
 CPU DLL:         SARMCM3.DLL V5.42.0.0
 Dialog DLL:      DCM.DLL V1.17.5.0
-Target DLL:      CMSIS_AGDI.dll V1.33.22.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.3.0.0
 Dialog DLL:      TCM.DLL V1.56.6.0
  
 <h2>Project:</h2>
 D:\Robocon\2026 ABU ROBOCON\2026_Vollerball_v1\Upper\R1\MDK-ARM\Upper1.uvprojx
-Project File Date:  01/19/2026
+Project File Date:  01/20/2026
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Users\wangmx\AppData\Local\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Upper1'
-compiling COM_basic.c...
+assembling startup_stm32f405xx.s...
+compiling stm32f4xx_hal_timebase_tim.c...
+compiling can.c...
+compiling gpio.c...
+compiling stm32f4xx_hal_tim_ex.c...
+compiling stm32f4xx_it.c...
+compiling tim.c...
+compiling usart.c...
+compiling stm32f4xx_hal_can.c...
 compiling main.c...
 ../Core/Src/main.c(210): warning:  #223-D: function "_tim2_callback" declared implicitly
   		_tim2_callback();
 ../Core/Src/main.c: 1 warning, 0 errors
-compiling COM_CommandLib.c...
+compiling freertos.c...
+compiling stm32f4xx_hal_msp.c...
+compiling stm32f4xx_hal_tim.c...
+compiling stm32f4xx_hal_flash_ramfunc.c...
+compiling stm32f4xx_hal_pwr.c...
+compiling stm32f4xx_hal_gpio.c...
+compiling stm32f4xx_hal_cortex.c...
+compiling stm32f4xx_hal.c...
+compiling stm32f4xx_hal_pwr_ex.c...
+compiling stm32f4xx_hal_flash.c...
+compiling stm32f4xx_hal_flash_ex.c...
+compiling stm32f4xx_hal_dma_ex.c...
+compiling stm32f4xx_hal_rcc_ex.c...
+compiling stm32f4xx_hal_dma.c...
+compiling croutine.c...
+compiling list.c...
+compiling stm32f4xx_hal_rcc.c...
+compiling event_groups.c...
+compiling timers.c...
+compiling heap_4.c...
+compiling stream_buffer.c...
+compiling queue.c...
+compiling tasks.c...
+compiling port.c...
+compiling HUST_Math_Lib.c...
+compiling PID.c...
+compiling stm32f4xx_hal_exti.c...
+compiling system_stm32f4xx.c...
 compiling COM_proplist.c...
+compiling crc_ccitt.c...
+compiling COM_CommandLib.c...
+compiling COM_basic.c...
+compiling gom_protocol.c...
+compiling CAN_Basic.c...
 compiling COM_ExecuteLib.c...
-..\COM_CAN_Lib\src\COM_ExecuteLib.c(47): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\COM_CAN_Lib\src\COM_ExecuteLib.c(28): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   	if(test[0]-1.14<1e-6&&test[1]-5.14<1e-6&&test[2]-19.19<1e-6&&test[3]-8.10<1e-6)
-..\COM_CAN_Lib\src\COM_ExecuteLib.c(47): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\COM_CAN_Lib\src\COM_ExecuteLib.c(28): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   	if(test[0]-1.14<1e-6&&test[1]-5.14<1e-6&&test[2]-19.19<1e-6&&test[3]-8.10<1e-6)
-..\COM_CAN_Lib\src\COM_ExecuteLib.c(47): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\COM_CAN_Lib\src\COM_ExecuteLib.c(28): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   	if(test[0]-1.14<1e-6&&test[1]-5.14<1e-6&&test[2]-19.19<1e-6&&test[3]-8.10<1e-6)
-..\COM_CAN_Lib\src\COM_ExecuteLib.c(47): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\COM_CAN_Lib\src\COM_ExecuteLib.c(28): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   	if(test[0]-1.14<1e-6&&test[1]-5.14<1e-6&&test[2]-19.19<1e-6&&test[3]-8.10<1e-6)
 ..\COM_CAN_Lib\src\COM_ExecuteLib.c: 4 warnings, 0 errors
+compiling stm32f4xx_hal_uart.c...
+compiling upper.c...
+..\Function\inc\upper.h(51): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Function\inc\application.h(41): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Go_Driver\Inc\mygo.h(35): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Function\inc\application.h(39): warning:  #1295-D: Deprecated declaration _tim2_callback - give arg types
+  void _tim2_callback();
+..\Function\inc\application.h(41): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Function\inc\upper.h(41): warning:  #1295-D: Deprecated declaration upper_go_reset - give arg types
+  float upper_go_reset();
+..\Function\inc\upper.h(42): warning:  #1295-D: Deprecated declaration upper_go_init - give arg types
+  void upper_go_init();
+..\Function\inc\upper.h(51): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Function\src\upper.c(44): warning:  #940-D: missing return statement at end of non-void function "upper_go_reset" 
+  }
+..\Function\src\upper.c(148): warning:  #940-D: missing return statement at end of non-void function "upper_slew_work" 
+  uint8_t upper_slew_work(){}
+..\Function\src\upper.c(175): warning:  #1-D: last line of file ends without a newline
+  {}
+..\Function\src\upper.c(175): warning:  #940-D: missing return statement at end of non-void function "upper_slew_excute" 
+  {}
+..\Function\src\upper.c: 12 warnings, 0 errors
+compiling application.c...
+..\Function\inc\application.h(41): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Function\inc\upper.h(51): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Go_Driver\Inc\mygo.h(35): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Function\inc\upper.h(41): warning:  #1295-D: Deprecated declaration upper_go_reset - give arg types
+  float upper_go_reset();
+..\Function\inc\upper.h(42): warning:  #1295-D: Deprecated declaration upper_go_init - give arg types
+  void upper_go_init();
+..\Function\inc\upper.h(51): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Function\inc\application.h(39): warning:  #1295-D: Deprecated declaration _tim2_callback - give arg types
+  void _tim2_callback();
+..\Function\inc\application.h(41): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Function\src\application.c(121): warning:  #177-D: variable "test"  was declared but never referenced
+  	uint8_t test = 0;
+..\Function\src\application.c(148): warning:  #1-D: last line of file ends without a newline
+  	
+..\Function\src\application.c: 10 warnings, 0 errors
+compiling DJ_Motor.c...
+..\Function\inc\upper.h(51): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Function\inc\application.h(41): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Go_Driver\Inc\mygo.h(35): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Function\inc\application.h(39): warning:  #1295-D: Deprecated declaration _tim2_callback - give arg types
+  void _tim2_callback();
+..\Function\inc\application.h(41): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Function\inc\upper.h(41): warning:  #1295-D: Deprecated declaration upper_go_reset - give arg types
+  float upper_go_reset();
+..\Function\inc\upper.h(42): warning:  #1295-D: Deprecated declaration upper_go_init - give arg types
+  void upper_go_init();
+..\Function\inc\upper.h(51): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\DJ_Driver\src\DJ_Motor.c: 8 warnings, 0 errors
+compiling cmsis_os2.c...
+compiling mygo.c...
+..\Function\inc\upper.h(51): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Go_Driver\Inc\mygo.h(35): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Function\inc\application.h(39): warning:  #1295-D: Deprecated declaration _tim2_callback - give arg types
+  void _tim2_callback();
+..\Function\inc\application.h(41): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Function\inc\upper.h(41): warning:  #1295-D: Deprecated declaration upper_go_reset - give arg types
+  float upper_go_reset();
+..\Function\inc\upper.h(42): warning:  #1295-D: Deprecated declaration upper_go_init - give arg types
+  void upper_go_init();
+..\Function\inc\upper.h(51): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Go_Driver\Inc\mygo.h(35): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Go_Driver\Src\mygo.c(38): warning:  #1-D: last line of file ends without a newline
+  }
+..\Go_Driver\Src\mygo.c: 9 warnings, 0 errors
 linking...
-Program Size: Code=19948 RO-data=1204 RW-data=248 ZI-data=21720  
+Program Size: Code=21520 RO-data=1204 RW-data=280 ZI-data=21720  
 FromELF: creating hex file...
-"Upper1\Upper1.axf" - 0 Error(s), 5 Warning(s).
+"Upper1\Upper1.axf" - 0 Error(s), 44 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -70,7 +198,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:05
+Build Time Elapsed:  00:00:15
 </pre>
 </body>
 </html>
