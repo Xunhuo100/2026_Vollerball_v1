@@ -13,14 +13,39 @@
 #include "application.h"
 #include "mygo.h"
 
+#define USE_CAN_1
+
+#include "CAN_Basic.h"
+#include "DJ_Motor.h"
+
+
 extern PIDStructTypedef GoSpeedPID;
-extern float resey_degree;
 extern HAL_StatusTypeDef tx_res;
 extern HAL_StatusTypeDef rx_res;
 extern MotorCmd_t RiseUp;
 extern MotorCmd_t FallDown;
 
+extern MotorTypeDef BowMotor;
+extern MOTORPIDstructTypedef BowMotorPID;
+
+extern uint8_t workstate;
+extern uint8_t hit_state;
+extern uint8_t bow_state;
+
+extern float targetDegree;
+extern float targetSpeed;
+
+extern uint8_t hit_cmd;
+extern uint8_t bow_cmd;
+
 float upper_go_reset();
 void upper_go_init();
+void upper_3508_init(uint32_t ID);
+void upper_hit_work(float speed);
+void upper_bow_work(float degree);
+uint8_t upper_hit_execute(float speed);
+uint8_t upper_bow_execute(float degree);
+uint8_t upper_slew_execute(float degree);
+
 
 #endif

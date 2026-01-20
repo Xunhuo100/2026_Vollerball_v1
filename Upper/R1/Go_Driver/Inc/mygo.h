@@ -12,7 +12,6 @@
 #include "crc_ccitt.h"
 
 #include "upper.h"
-#include "application.h"
 
 typedef struct
 {
@@ -23,6 +22,8 @@ typedef struct
 	uint8_t tx_res;
 	uint8_t rx_res;
 } myGo;
+
+#include "application.h"
 
 
 void mygo_init(myGo* m,uint8_t id,float speed_kp,float speed_ki,float speed_kd,float limit_output);
