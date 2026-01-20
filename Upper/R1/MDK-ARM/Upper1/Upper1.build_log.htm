@@ -27,32 +27,27 @@ Project File Date:  01/19/2026
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Users\wangmx\AppData\Local\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Upper1'
-compiling application.c...
-../Function/inc/application.h(41): warning:  #1-D: last line of file ends without a newline
-  #endif
-../Function/inc/upper.h(38): warning:  #1-D: last line of file ends without a newline
-  #endif
-../Go_Driver/Inc/mygo.h(35): warning:  #1-D: last line of file ends without a newline
-  #endif
-../Function/inc/upper.h(32): warning:  #1295-D: Deprecated declaration upper_go_reset - give arg types
-  float upper_go_reset();
-../Function/inc/upper.h(33): warning:  #1295-D: Deprecated declaration upper_go_init - give arg types
-  void upper_go_init();
-../Function/inc/upper.h(38): warning:  #1-D: last line of file ends without a newline
-  #endif
-../Function/inc/application.h(39): warning:  #1295-D: Deprecated declaration _tim2_callback - give arg types
-  void _tim2_callback();
-../Function/inc/application.h(41): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\..\..\..\2026_VolleyBall\Upper1\Function\src\application.c(164): warning:  #177-D: variable "test"  was declared but never referenced
-  	uint8_t test = 0;
-..\..\..\..\2026_VolleyBall\Upper1\Function\src\application.c(191): warning:  #1-D: last line of file ends without a newline
-  	
-..\..\..\..\2026_VolleyBall\Upper1\Function\src\application.c: 10 warnings, 0 errors
+compiling COM_basic.c...
+compiling main.c...
+../Core/Src/main.c(210): warning:  #223-D: function "_tim2_callback" declared implicitly
+  		_tim2_callback();
+../Core/Src/main.c: 1 warning, 0 errors
+compiling COM_CommandLib.c...
+compiling COM_proplist.c...
+compiling COM_ExecuteLib.c...
+..\COM_CAN_Lib\src\COM_ExecuteLib.c(47): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	if(test[0]-1.14<1e-6&&test[1]-5.14<1e-6&&test[2]-19.19<1e-6&&test[3]-8.10<1e-6)
+..\COM_CAN_Lib\src\COM_ExecuteLib.c(47): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	if(test[0]-1.14<1e-6&&test[1]-5.14<1e-6&&test[2]-19.19<1e-6&&test[3]-8.10<1e-6)
+..\COM_CAN_Lib\src\COM_ExecuteLib.c(47): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	if(test[0]-1.14<1e-6&&test[1]-5.14<1e-6&&test[2]-19.19<1e-6&&test[3]-8.10<1e-6)
+..\COM_CAN_Lib\src\COM_ExecuteLib.c(47): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	if(test[0]-1.14<1e-6&&test[1]-5.14<1e-6&&test[2]-19.19<1e-6&&test[3]-8.10<1e-6)
+..\COM_CAN_Lib\src\COM_ExecuteLib.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=19152 RO-data=1200 RW-data=188 ZI-data=21124  
+Program Size: Code=19948 RO-data=1204 RW-data=248 ZI-data=21720  
 FromELF: creating hex file...
-"Upper1\Upper1.axf" - 0 Error(s), 10 Warning(s).
+"Upper1\Upper1.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -75,7 +70,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>

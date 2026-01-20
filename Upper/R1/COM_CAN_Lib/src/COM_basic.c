@@ -51,13 +51,13 @@ void Send_Frame_COM(COMFrame* Send_Frame,int USARTx)
 		switch(USARTx)
 		{
 			case MYUSART1:
-		    HAL_UART_Transmit(&huart1,&Send_Buf[0],LengthTemp,10);
+		    //HAL_UART_Transmit(&huart1,&Send_Buf[0],LengthTemp,10);
 			  break;
 		  case MYUSART2:                                 
-		   // HAL_UART_Transmit(&huart2,&Send_Buf[0],LengthTemp,10);
+		    HAL_UART_Transmit(&huart2,&Send_Buf[0],LengthTemp,10);
 			  break;
 			case MYUSART3:
-		    //HAL_UART_Transmit(&huart4,&Send_Buf[0],LengthTemp,10);
+		    HAL_UART_Transmit(&huart4,&Send_Buf[0],LengthTemp,10);
 			  break;
 			case MYUSART4:
 		    HAL_UART_Transmit(&huart6,&Send_Buf[0],LengthTemp,10);
@@ -200,11 +200,10 @@ void Get_Frame_COM(uint8_t Data, int USARTx)
 	
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-	if(huart==&huart1)
-	{
-		HAL_UART_Transmit(&huart6,&data_uart_rec,1,1000);
-		Get_Frame_COM(data_uart_rec,MYUSART1);
-	}
+//	if(huart==&huart1)
+//	{
+//		Get_Frame_COM(data_uart_rec,MYUSART1);
+//	}
 //	if(huart==&huart2)
 //	{
 //		Get_Frame_COM(data_uart_rec,MYUSART2);

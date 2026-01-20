@@ -31,12 +31,21 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stdio.h"
+#include "gom_protocol.h"
+#include "math.h"
+#include  "stdbool.h"
+#include  <stdarg.h>
+#include  <stdlib.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-
+extern uint8_t data_uart_rec;
+extern uint8_t my_jump_flag;
+extern uint8_t my_start_flag;
+extern bool my_lock_flag;
+extern uint8_t dribble;
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/

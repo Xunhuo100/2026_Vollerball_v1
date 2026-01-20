@@ -43,8 +43,13 @@
 "upper1\application.o"
 "upper1\pid.o"
 "upper1\upper.o"
-"upper1\can_basic.o"
+"upper1\hust_math_lib.o"
 "upper1\dj_motor.o"
+"upper1\can_basic.o"
+"upper1\com_basic.o"
+"upper1\com_commandlib.o"
+"upper1\com_executelib.o"
+"upper1\com_proplist.o"
 --strict --scatter "Upper1\Upper1.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

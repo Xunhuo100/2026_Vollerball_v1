@@ -11,22 +11,11 @@
  */
 #include "COM_Basic.h"
 #include "COM_proplist.h"
-#include "Task_Chassis.h"
 #include "HUST_Math_Lib.h"
 #include "usart.h"
 
-// MYUSART1 : PC
-// MYUSART4 : 手柄
 /***************************************MYUSART1发送函数******************************************/
-void ChassisToPc(void)
-{
-	COMFrame SendFrame;
 
-	SendFrame.Length = 1;
-	SendFrame.Prop = LOOPTOPC;	
-	SendFrame.Data.uint8_ts[0] = 1;
-	Send_Frame_COM(&SendFrame, MYUSART1);//发给PC
-}
 /***************************************MYUSART2发送函数******************************************/
 
 /***************************************MYUSART3发送函数******************************************/

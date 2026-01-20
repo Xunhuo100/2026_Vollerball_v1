@@ -26,12 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "stdio.h"
-#include "gom_protocol.h"
-#include "upper.h"
-#include "application.h"
-#include "mygo.h"
-extern myGo m;
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -41,8 +36,7 @@ extern myGo m;
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define RS485_RxMode()    (HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_RESET))
-#define RS485_TxMode()    (HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_SET))
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -53,8 +47,7 @@ extern myGo m;
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-MotorCmd_t cmd = {0};
-MotorData_t data = {0};
+
 
 /* USER CODE END PV */
 
@@ -67,6 +60,11 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+uint8_t data_uart_rec=0;
+uint8_t my_jump_flag = 0;
+uint8_t my_start_flag = false;
+uint8_t dribble = 0;
+bool my_lock_flag = true;
 
 /* USER CODE END 0 */
 
@@ -105,7 +103,11 @@ int main(void)
   MX_USART3_UART_Init();
   MX_TIM2_Init();
   MX_CAN1_Init();
+  MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_15,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_14,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_15,GPIO_PIN_SET);
 	HAL_TIM_Base_Start_IT(&htim2);
 	HAL_Delay(500);
 	

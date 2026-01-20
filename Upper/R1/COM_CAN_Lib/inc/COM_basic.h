@@ -24,7 +24,6 @@ typedef union {
     float     floats_ts[32];
 } COMData;
 
-/******************************?CAN????????*********************************/
 typedef struct {
     uint8_t   Length;
     uint8_t   Prop;

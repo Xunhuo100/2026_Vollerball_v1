@@ -1,11 +1,12 @@
 #ifndef CAN_BASIC_H_
 #define CAN_BASIC_H_
 
-#include "main.h"
 #include "stm32f4xx_hal.h"
 #include "can.h"
 #include "string.h"
 #include "cmsis_os2.h"
+#include "main.h"
+
 
 #define USE_CAN_1
 

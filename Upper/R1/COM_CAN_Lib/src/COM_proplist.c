@@ -1,19 +1,21 @@
 #include "COM_proplist.h"
 
-//pc
 COMFunDict g_My_USART1_Prop_Array[] = {	
 	{NULL,NULL},
-	{SETVELOCITY,setVelocity},
+//	{SETVELOCITY,setVelocity},
 };
-//¶¨Î»°å
 COMFunDict g_My_USART2_Prop_Array[] = {
 	{NULL,NULL},
+	{TEST,com_test},
+	{UPPER_DEG_SET,com_upper_deg_set},
+	{UPPER_SPD_SET,com_upper_spd_set},
+	{UPPER_HIT,com_upper_hit}
 };
 
 COMFunDict g_My_USART3_Prop_Array[] = {
 	{NULL,NULL},
 };
-//Ê¾²¨Æ÷
+
 COMFunDict g_My_USART4_Prop_Array[] = {
 	{NULL,NULL},
 };
