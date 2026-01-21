@@ -105,9 +105,11 @@ int main(void)
   MX_CAN1_Init();
   MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
-	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_15,GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_14,GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_15,GPIO_PIN_SET);
+	char p[] = "aaaa";
+	HAL_UART_Receive_IT(&huart2,&data_uart_rec,1);
+//	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_15,GPIO_PIN_SET);
+//	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_14,GPIO_PIN_SET);
+//	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_15,GPIO_PIN_SET);
 	HAL_TIM_Base_Start_IT(&htim2);
 	HAL_Delay(500);
 	
@@ -207,7 +209,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* USER CODE BEGIN Callback 0 */
 	if(htim->Instance == TIM2)
-		_tim2_callback();
+	{
+//			_tim2_callback();
+
+	}
   /* USER CODE END Callback 0 */
   if (htim->Instance == TIM9)
   {

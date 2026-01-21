@@ -91,7 +91,4 @@ void MyMotor_PID_init(MOTORPIDstructTypedef* MotorPID)
 		
 }
 
-void upper_go1_init()
-{
-}
 

@@ -147,6 +147,7 @@ float Get_RM3508_Distance(MotorTypeDef Motor)
 short temp_angle = 0;
 short temp_speed = 0;
 short temp_current = 0;
+
 void Process_DJFrame_CAN(CANFrame *Frame_Process)
 {
 	uint32_t id = Frame_Process->Id.StdID & 0x00F;
@@ -156,9 +157,9 @@ void Process_DJFrame_CAN(CANFrame *Frame_Process)
 	
 	switch (id)
 	{
-		case MyMotor_CAN_ID:
+		case 0x03:
 			
-			BowMotor.ID = MyMotor_CAN_ID;
+			BowMotor.ID = 0x03;
 			if (BowMotor.enable == 0)
 			{
 					BowMotor.enable = 1;
@@ -175,8 +176,32 @@ void Process_DJFrame_CAN(CANFrame *Frame_Process)
 			}
 			BowMotor.PrePosition = BowMotor.PositionMeasure;
 			BowMotor.PositionMeasure += Get_RM3508_Distance(BowMotor);
-			BowMotor.SpeedMeasure = (float)(temp_speed) *187.f/1591.f;
+			BowMotor.SpeedMeasure = (float)(temp_speed) *187.f/3591.f;
 			BowMotor.CurrentMeasure = (float)(temp_current);
+			
+			break;
+			
+		case 0x01:
+			
+			SlewMotor.ID = 0x01;
+			if (SlewMotor.enable == 0)
+			{
+					SlewMotor.enable = 1;
+			}
+
+			if (SlewMotor.encoderPre == 0 && SlewMotor.encoder == 0)
+			{
+					SlewMotor.encoderPre = SlewMotor.encoder = temp_angle;
+			}
+			else
+			{
+					SlewMotor.encoderPre = SlewMotor.encoder;
+					SlewMotor.encoder = temp_angle;
+			}
+			SlewMotor.PrePosition = SlewMotor.PositionMeasure;
+			SlewMotor.PositionMeasure += Get_RM3508_Distance(SlewMotor);
+			SlewMotor.SpeedMeasure = (float)(temp_speed) *187.f/3591.f;
+			SlewMotor.CurrentMeasure = (float)(temp_current);
 			
 			break;
 			

@@ -11,36 +11,73 @@ MotorCmd_t RiseUp;
 MotorCmd_t FallDown;//两个终点位置
 
 MotorTypeDef BowMotor;
+MotorTypeDef SlewMotor;
 MOTORPIDstructTypedef BowMotorPID;
+MOTORPIDstructTypedef SlewMotorPID;
 
-uint8_t workstate = Busy;
 uint8_t hit_state = Busy;
-uint8_t bow_state = Busy;
+//uint8_t bow_state = Busy;
 
 uint8_t hit_cmd = 0;
-uint8_t bow_cmd = 0;
+//uint8_t bow_cmd = 0;
 
 float targetDegree;
 float targetSpeed;
 
 void test(){}
-
-float upper_go_reset()//强制把GO拉到初始位置, 返回初始位置的实际角度值
+	
+void bow_motor_PID_init(MOTORPIDstructTypedef* MotorPID)
 {
-    MotorData_t data = {0};
-		
-    modify_data(&FallDown);
+    MotorPID->PosPID.Kp = 8.5f;
+    MotorPID->PosPID.Ki = 0.00f;
+    MotorPID->PosPID.Kd = 45.50f;
+    MotorPID->PosPID.LimitIntegral = 50.0f;
+    MotorPID->PosPID.LimitOutput = 200.0f;
+		MotorPID->PosPID.Integral = 0;
+		MotorPID->PosPID.PreError = 0;
+	
+    MotorPID->SpeedPID.Kp = 80.0f;
+    MotorPID->SpeedPID.Ki = 0.001f;
+    MotorPID->SpeedPID.Kd = 70.0f;
+    MotorPID->SpeedPID.LimitIntegral = 500.0f;
+    MotorPID->SpeedPID.LimitOutput = 3500.0f;
+		MotorPID->SpeedPID.Integral = 0;
+		MotorPID->SpeedPID.PreError = 0;
 
-    for(int i = 0;i<5;i++)
-    {
-      tx_res = HAL_UART_Transmit(&huart1, (uint8_t *)&FallDown.motor_send_data, sizeof(FallDown.motor_send_data), 1);
-			rx_res = HAL_UART_Receive(&huart1, (uint8_t *)&data.motor_recv_data, sizeof(data.motor_recv_data), 1);
-			if (rx_res == HAL_TIMEOUT)
-			{
-				data.timeout++;
-			}
-			osDelay(1);
-    }
+		MotorPID->ReservePID.Kp = 0.0f;
+    MotorPID->ReservePID.Ki = 0.0f;
+    MotorPID->ReservePID.Kd = 0.0f;
+    MotorPID->ReservePID.LimitIntegral = 0.0f;
+    MotorPID->ReservePID.LimitOutput = 0.0f;
+		MotorPID->ReservePID.Integral = 0;
+		MotorPID->ReservePID.PreError = 0;
+}
+
+void slew_motor_PID_init(MOTORPIDstructTypedef* MotorPID)
+{
+    MotorPID->PosPID.Kp = 8.5f;
+    MotorPID->PosPID.Ki = 0.00f;
+    MotorPID->PosPID.Kd = 45.50f;
+    MotorPID->PosPID.LimitIntegral = 50.0f;
+    MotorPID->PosPID.LimitOutput = 200.0f;
+		MotorPID->PosPID.Integral = 0;
+		MotorPID->PosPID.PreError = 0;
+	
+    MotorPID->SpeedPID.Kp = 80.0f;
+    MotorPID->SpeedPID.Ki = 0.001f;
+    MotorPID->SpeedPID.Kd = 70.0f;
+    MotorPID->SpeedPID.LimitIntegral = 500.0f;
+    MotorPID->SpeedPID.LimitOutput = 3500.0f;
+		MotorPID->SpeedPID.Integral = 0;
+		MotorPID->SpeedPID.PreError = 0;
+
+		MotorPID->ReservePID.Kp = 0.0f;
+    MotorPID->ReservePID.Ki = 0.0f;
+    MotorPID->ReservePID.Kd = 0.0f;
+    MotorPID->ReservePID.LimitIntegral = 0.0f;
+    MotorPID->ReservePID.LimitOutput = 0.0f;
+		MotorPID->ReservePID.Integral = 0;
+		MotorPID->ReservePID.PreError = 0;
 }
 
 void upper_go_init()
@@ -64,11 +101,16 @@ void upper_go_init()
 		mygo_init(&m,1,0.23,0.005,0.03,10.f);
 }
 
-void upper_3508_init(uint32_t ID)
+void upper_3508_init()
 {
-	BowMotor.ID = ID;
+	BowMotor.ID = 3;
+	SlewMotor.ID = 1;
 	BowMotor.mode = MOTOR_POSITION;
-	MyMotor_PID_init(&(BowMotorPID));
+	SlewMotor.mode = MOTOR_POSITION;
+	bow_motor_PID_init(&(BowMotorPID));
+	slew_motor_PID_init(&(SlewMotorPID));
+	BowMotor.PositionExpected = 0;
+	SlewMotor.PositionExpected = 0;
 	CAN1_Start();
 }
 
@@ -121,31 +163,31 @@ void upper_hit_work(float speed)
 	}
 }
 
-void upper_bow_work(float degree)
-{
-	uint8_t isFinish = 0;
-	bow_state = Busy;
-	BowMotor.PositionExpected = degree;
-	while(1)
-	{
-		BowMotor.SpeedExpected =  Pid_Regulate(BowMotor.PositionExpected,BowMotor.PositionMeasure,&BowMotorPID.PosPID);
-		BowMotor.CurrentExpected = Pid_Regulate(BowMotor.SpeedExpected,BowMotor.SpeedMeasure,&BowMotorPID.SpeedPID);
-		dj_can_set(ID_1_4, MYCAN1, 0, 0, BowMotor.CurrentExpected,0);
-		if(fabs(BowMotor.PositionExpected-BowMotor.PositionMeasure)<10)
-		{
-			isFinish++;
-			if(isFinish >= 10)
-			{
-				bow_state = Free;
-				bow_cmd = 0;
-				return;
-			}
-		}
-    osDelay(1);
-	}
-}
+//void upper_bow_work(float degree)
+//{
+//	uint8_t isFinish = 0;
+//	bow_state = Busy;
+//	BowMotor.PositionExpected = degree;
+//	while(1)
+//	{
+//		BowMotor.SpeedExpected =  Pid_Regulate(BowMotor.PositionExpected,BowMotor.PositionMeasure,&BowMotorPID.PosPID);
+//		BowMotor.CurrentExpected = Pid_Regulate(BowMotor.SpeedExpected,BowMotor.SpeedMeasure,&BowMotorPID.SpeedPID);
+//		dj_can_set(ID_1_4, MYCAN1, 0, 0, BowMotor.CurrentExpected,0);
+//		if(fabs(BowMotor.PositionExpected-BowMotor.PositionMeasure)<10)
+//		{
+//			isFinish++;
+//			if(isFinish >= 10)
+//			{
+//				bow_state = Free;
+//				bow_cmd = 0;
+//				return;
+//			}
+//		}
+//    osDelay(1);
+//	}
+//}
 
-uint8_t upper_slew_work(){}
+//uint8_t upper_slew_work(){}
 
 uint8_t upper_hit_execute(float speed)
 {
@@ -159,17 +201,40 @@ uint8_t upper_hit_execute(float speed)
 	else return 0;
 }
 
-uint8_t upper_bow_execute(float degree)
+void upper_bow_slew_execute(float bow_deg,float slew_deg)
 {
-	if(bow_state == Free)
-	{
-		targetDegree = degree;
-		bow_cmd = 1;
-		osDelay(50);
-		return 1;
-	}
-	else return 0;
+	BowMotor.PositionExpected = bow_deg;
+	SlewMotor.PositionExpected = slew_deg;
 }
 
-uint8_t upper_slew_excute(float degree)
-{}
+//uint8_t upper_bow_execute(float degree)
+//{
+//	if(bow_state == Free)
+//	{
+//		targetDegree = degree;
+//		bow_cmd = 1;
+//		osDelay(50);
+//		return 1;
+//	}
+//	else return 0;
+//}
+
+//uint8_t upper_slew_excute(float degree)
+//{}
+//float upper_go_reset()//强制把GO拉到初始位置, 返回初始位置的实际角度值
+//{
+//    MotorData_t data = {0};
+//		
+//    modify_data(&FallDown);
+
+//    for(int i = 0;i<5;i++)
+//    {
+//      tx_res = HAL_UART_Transmit(&huart1, (uint8_t *)&FallDown.motor_send_data, sizeof(FallDown.motor_send_data), 1);
+//			rx_res = HAL_UART_Receive(&huart1, (uint8_t *)&data.motor_recv_data, sizeof(data.motor_recv_data), 1);
+//			if (rx_res == HAL_TIMEOUT)
+//			{
+//				data.timeout++;
+//			}
+//			osDelay(1);
+//    }
+//}

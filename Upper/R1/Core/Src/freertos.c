@@ -68,10 +68,10 @@ const osThreadAttr_t Test_LED_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
-/* Definitions for Task_Bow */
-osThreadId_t Task_BowHandle;
-const osThreadAttr_t Task_Bow_attributes = {
-  .name = "Task_Bow",
+/* Definitions for Task_Bow_Slew */
+osThreadId_t Task_Bow_SlewHandle;
+const osThreadAttr_t Task_Bow_Slew_attributes = {
+  .name = "Task_Bow_Slew",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
@@ -91,7 +91,7 @@ const osThreadAttr_t Task_Main_attributes = {
 void StartDefaultTask(void *argument);
 extern void task_hit(void *argument);
 extern void test_led_task(void *argument);
-extern void task_bow(void *argument);
+extern void task_bow_slew(void *argument);
 extern void task_main(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -132,8 +132,8 @@ void MX_FREERTOS_Init(void) {
   /* creation of Test_LED */
   Test_LEDHandle = osThreadNew(test_led_task, NULL, &Test_LED_attributes);
 
-  /* creation of Task_Bow */
-  Task_BowHandle = osThreadNew(task_bow, NULL, &Task_Bow_attributes);
+  /* creation of Task_Bow_Slew */
+  Task_Bow_SlewHandle = osThreadNew(task_bow_slew, NULL, &Task_Bow_Slew_attributes);
 
   /* creation of Task_Main */
   Task_MainHandle = osThreadNew(task_main, NULL, &Task_Main_attributes);

@@ -26,13 +26,14 @@ extern MotorCmd_t RiseUp;
 extern MotorCmd_t FallDown;
 
 extern MotorTypeDef BowMotor;
+extern MotorTypeDef SlewMotor;
 extern MOTORPIDstructTypedef BowMotorPID;
+extern MOTORPIDstructTypedef SlewMotorPID;
 
-extern uint8_t workstate;
 extern uint8_t hit_state;
-extern uint8_t bow_state;
+//extern uint8_t bow_state;
 
-extern float targetDegree;
+//extern float targetDegree;
 extern float targetSpeed;
 
 extern uint8_t hit_cmd;
@@ -40,12 +41,12 @@ extern uint8_t bow_cmd;
 
 float upper_go_reset();
 void upper_go_init();
-void upper_3508_init(uint32_t ID);
+void upper_3508_init();
 void upper_hit_work(float speed);
-void upper_bow_work(float degree);
+//void upper_bow_work(float degree);
 uint8_t upper_hit_execute(float speed);
-uint8_t upper_bow_execute(float degree);
-uint8_t upper_slew_execute(float degree);
-
+void upper_bow_slew_execute(float bow_deg,float slew_deg);
+void slew_motor_PID_init(MOTORPIDstructTypedef* MotorPID);
+void bow_motor_PID_init(MOTORPIDstructTypedef* MotorPID);
 
 #endif

@@ -9,52 +9,15 @@ uint8_t servestate = 0;
 
 uint8_t initstate = 0;
 
-int fputc(int ch, FILE *stream)
-{
-	HAL_UART_Transmit(&huart4,(uint8_t*)&ch,1,HAL_MAX_DELAY);
-	return ch;
-}
-
 void task_main(void * argument)
 {
 	while(initstate!=2)
 		osDelay	(1);
 	
-	upper_bow_execute(0);
+	upper_bow_slew_execute(0,0);
 	osDelay(500);
 	while(1)
 	{
-		if(servestate == 0)
-		{
-			upper_hit_execute(50);
-			
-			while(1)
-			{
-				if(hit_state == Free)
-				{
-					servestate = 1;
-					osDelay(300);
-					break;
-				}
-				osDelay(1);
-			}
-		}
-		if(servestate == 1)
-		{
-			upper_hit_execute(40);
-			
-			while(1)
-			{
-				if(hit_state == Free)
-				{
-					servestate = 2;
-					break;
-				}
-				osDelay(1);
-
-			}
-		}
-		
 		osDelay(1);
 	}
 	
@@ -80,38 +43,18 @@ void task_hit(void *argument)
 	}
 }
 
-void task_bow(void *argument)
+void task_bow_slew(void *argument)
 {
-	upper_3508_init(3);
-	bow_state = Free;
+	upper_3508_init();
 	initstate++;
   while(1)
   {
-		if(bow_cmd == 1&& bow_state == Free)
-		{
-			upper_bow_work(targetDegree);
-			osDelay(100);
-		}
-		switch(BowMotor.mode)
-		{
-			case MOTOR_POSITION:				
-				BowMotor.SpeedExpected =  Pid_Regulate(BowMotor.PositionExpected,BowMotor.PositionMeasure,&BowMotorPID.PosPID);
-
-			case MOTOR_SPEED:						
-				BowMotor.CurrentExpected = Pid_Regulate(BowMotor.SpeedExpected,BowMotor.SpeedMeasure,&BowMotorPID.SpeedPID);
-			
-			case MOTOR_CURRENT: 
-				break; 
-			
-			case MOTOR_ERROR:	
-				break;
-			
-			default:
-				BowMotor.CurrentExpected = 0;
-				break;		
-		}
+		BowMotor.SpeedExpected =  Pid_Regulate(BowMotor.PositionExpected,BowMotor.PositionMeasure,&BowMotorPID.PosPID);
+		BowMotor.CurrentExpected = Pid_Regulate(BowMotor.SpeedExpected,BowMotor.SpeedMeasure,&BowMotorPID.SpeedPID);
+		SlewMotor.SpeedExpected = Pid_Regulate(SlewMotor.PositionExpected,SlewMotor.PositionMeasure,&SlewMotorPID.PosPID);
+		SlewMotor.CurrentExpected = Pid_Regulate(SlewMotor.SpeedExpected,SlewMotor.SpeedMeasure,&SlewMotorPID.SpeedPID);
 		
-		dj_can_set(ID_1_4, MYCAN1, 0, 0, BowMotor.CurrentExpected,0);
+		dj_can_set(ID_1_4, MYCAN1, SlewMotor.CurrentExpected, 0, BowMotor.CurrentExpected,0);
     osDelay(1);
   }
 }

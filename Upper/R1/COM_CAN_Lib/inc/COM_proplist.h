@@ -31,7 +31,7 @@ extern const uint8_t g_My_USART4_Prop_Count;
 /******************************prop,属性值8位*********************************/
 #define UPPER_DEG_SET 0x17 //设置俯仰和回转的角度
 #define UPPER_SPD_SET 0x32 //设置下一次击打的速度
-#define UPPER_HIT     0x91 //击球
+#define UPPER_HIT     0xA2 //击球
 #define TEST          0xDA
 
 /******************************接收函数*********************************/

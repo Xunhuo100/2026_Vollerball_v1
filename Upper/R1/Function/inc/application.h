@@ -26,8 +26,6 @@ enum UpperState{
 
 extern float init_degree;
 
-extern uint8_t workstate;
-
 extern uint8_t hit_state;
 
 extern uint8_t bow_state;

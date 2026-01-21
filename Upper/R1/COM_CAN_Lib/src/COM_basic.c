@@ -203,11 +203,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 //	if(huart==&huart1)
 //	{
 //		Get_Frame_COM(data_uart_rec,MYUSART1);
-//	}
-//	if(huart==&huart2)
-//	{
-//		Get_Frame_COM(data_uart_rec,MYUSART2);
-//	}
+
+	if(huart==&huart2)
+	{
+		Get_Frame_COM(data_uart_rec,MYUSART2);
+	}
 //	if(huart==&huart4)
 //	{
 //		Get_Frame_COM(data_uart_rec,MYUSART3);
@@ -221,7 +221,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		 huart->RxState = HAL_UART_STATE_READY;
       __HAL_UNLOCK(huart);
 	}
-	//HAL_UART_Receive_IT(&huart2,&data_uart_rec,1);
+	HAL_UART_Receive_IT(&huart2,&data_uart_rec,1);
 	HAL_UART_Receive_IT(&huart6,&data_uart_rec,1);
 }
 
