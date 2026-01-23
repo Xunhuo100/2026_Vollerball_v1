@@ -49,7 +49,12 @@ void com_upper_deg_set(COMFrame* frame)
 {
 	float bow_deg = (frame->Data.floats_ts[0] >45.0)?45.0:frame->Data.floats_ts[0];
 	bow_deg = bow_deg*41.f/19.f;
+
 	float slew_deg = frame->Data.floats_ts[1];
+	if(slew_deg>45.f)slew_deg = 45.f;
+	else if(slew_deg<-45.f)slew_deg = - 45.f; 
+	slew_deg = slew_deg*87.f/19.f;
+	
 	upper_bow_slew_execute(bow_deg,slew_deg);
 }
 

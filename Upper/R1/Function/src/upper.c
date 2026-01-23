@@ -163,32 +163,6 @@ void upper_hit_work(float speed)
 	}
 }
 
-//void upper_bow_work(float degree)
-//{
-//	uint8_t isFinish = 0;
-//	bow_state = Busy;
-//	BowMotor.PositionExpected = degree;
-//	while(1)
-//	{
-//		BowMotor.SpeedExpected =  Pid_Regulate(BowMotor.PositionExpected,BowMotor.PositionMeasure,&BowMotorPID.PosPID);
-//		BowMotor.CurrentExpected = Pid_Regulate(BowMotor.SpeedExpected,BowMotor.SpeedMeasure,&BowMotorPID.SpeedPID);
-//		dj_can_set(ID_1_4, MYCAN1, 0, 0, BowMotor.CurrentExpected,0);
-//		if(fabs(BowMotor.PositionExpected-BowMotor.PositionMeasure)<10)
-//		{
-//			isFinish++;
-//			if(isFinish >= 10)
-//			{
-//				bow_state = Free;
-//				bow_cmd = 0;
-//				return;
-//			}
-//		}
-//    osDelay(1);
-//	}
-//}
-
-//uint8_t upper_slew_work(){}
-
 uint8_t upper_hit_execute(float speed)
 {
 	if(hit_state == Free)
@@ -207,34 +181,3 @@ void upper_bow_slew_execute(float bow_deg,float slew_deg)
 	SlewMotor.PositionExpected = slew_deg;
 }
 
-//uint8_t upper_bow_execute(float degree)
-//{
-//	if(bow_state == Free)
-//	{
-//		targetDegree = degree;
-//		bow_cmd = 1;
-//		osDelay(50);
-//		return 1;
-//	}
-//	else return 0;
-//}
-
-//uint8_t upper_slew_excute(float degree)
-//{}
-//float upper_go_reset()//强制把GO拉到初始位置, 返回初始位置的实际角度值
-//{
-//    MotorData_t data = {0};
-//		
-//    modify_data(&FallDown);
-
-//    for(int i = 0;i<5;i++)
-//    {
-//      tx_res = HAL_UART_Transmit(&huart1, (uint8_t *)&FallDown.motor_send_data, sizeof(FallDown.motor_send_data), 1);
-//			rx_res = HAL_UART_Receive(&huart1, (uint8_t *)&data.motor_recv_data, sizeof(data.motor_recv_data), 1);
-//			if (rx_res == HAL_TIMEOUT)
-//			{
-//				data.timeout++;
-//			}
-//			osDelay(1);
-//    }
-//}

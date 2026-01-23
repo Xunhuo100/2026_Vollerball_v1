@@ -14,6 +14,7 @@ void task_main(void * argument)
 	while(initstate!=2)
 		osDelay	(1);
 	
+	upper_hit_execute(5);
 	upper_bow_slew_execute(0,0);
 	osDelay(500);
 	while(1)
